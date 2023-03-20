@@ -4,8 +4,8 @@
 
 /**
  *main - Entry point
- *Description: Get the last digit
- *Retun: always 0
+ *Description: 'get the last digit'
+ *Return: always 0
  */
 
 int main(void)
