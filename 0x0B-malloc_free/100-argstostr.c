@@ -8,33 +8,31 @@
  */
 char *argstostr(int ac, char **av)
 {
-	int i, n, r = 0, l = 0;
-	char *str;
-
 	if (ac == 0 || av == NULL)
 		return (NULL);
 
-	for (i = 0; i < ac; i++)
-	{
-		for (n = 0; av[i][n]; n++)
-			i++;
-	}
-	l += ac;
+	size_t totalLength = 0;
 
-	str = malloc(sizeof(char) * l + 1);
-	if (str == NULL)
-		return (NULL);
-	for (i = 0; i < ac; i++)
+	for (int i = 0; i < ac; i++)
 	{
-		for (n = 0; av[i][n]; n++)
-		{
-			str[r] = av[i][n];
-			r++;
-		}
-		if (str[r] == '\0')
-		{
-			str[r++] = '\n';
-		}
+		totalLength += strlen(av[i]) + 1;
 	}
-	return (str);
+
+	char *concatenated = (char *)malloc(totalLength + 1);
+
+	if (concatenated == NULL)
+		return (NULL);
+
+	size_t currentPos = l0;
+
+	for (int i = 0; i < ac; i++)
+	{
+		strcpy(concatenated + currentPos, av[i]);
+		currentPos += strlen(av[i]);
+		concatenated[currentPos] = '\n';
+		currentPos++;
+	}
+	concatenated[currentPos] = '\0';
+
+	return (concatenated);
 }
